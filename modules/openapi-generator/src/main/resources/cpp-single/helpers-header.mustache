@@ -1,0 +1,23 @@
+{{>licenseInfo}}
+
+#ifndef SINGLE_CPP_CLIENT_HELPERS_H_
+#define SINGLE_CPP_CLIENT_HELPERS_H_
+
+#include <string>
+#include "json.hpp"
+
+bool isprimitive(std::string type);
+
+void jsonToValue(void* target, nlohmann::json value, std::string type);
+
+std::string stringify(long input);
+
+std::string stringify(int input);
+
+std::string stringify(double input);
+
+std::string stringify(float input);
+
+std::string stringify(std::string input);
+
+#endif /* SINGLE_CPP_CLIENT_HELPERS_H_ */

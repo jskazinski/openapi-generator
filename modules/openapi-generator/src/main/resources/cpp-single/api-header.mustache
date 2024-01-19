@@ -1,0 +1,67 @@
+{{>licenseInfo}}
+{{#models}}{{#model}}/*
+ * {{classname}}.h
+ *
+ * {{description}}
+ */
+
+#ifndef SINGLE_CPP_CLIENT_{{classname}}_H_
+#define SINGLE_CPP_CLIENT_{{classname}}_H_
+
+{{/model}}{{/models}}
+#include <string>
+#include "json.hpp"
+#include "Helpers.h"
+{{#imports}}
+{{{import}}}
+{{/imports}}
+
+namespace SingleCppClient {
+{{#models}}{{#model}}
+
+class {{classname}} {
+public:
+
+    /* Constructors */
+    {{classname}}();
+    {{classname}}(std::string jsonString);
+
+    /* Destructor */
+    virtual ~{{classname}}();
+
+    /* Retrieve a JSON representation of this class */
+    nlohmann::json toJson();
+
+    /* Fills in members of this class from the JSON object representing it */
+    void fromJson(std::string jsonObj);
+
+    {{#vars}}
+    /* Get {{{description}}} */
+    {{dataType}}{{#isContainer}}{{#isMap}}<std::string, std::string>{{/isMap}}{{^isMap}}<{{#items}}{{dataType}}{{/items}}>{{/isMap}}{{/isContainer}} {{getter}}();
+    {{/vars}}
+
+    {{#vars}}
+    /* Set {{{description}}} */
+    void {{setter}}({{dataType}} {{#isContainer}}{{#isMap}}<std::string, std::string>{{/isMap}}{{^isMap}}<{{#items}}{{dataType}}{{/items}}>{{/isMap}}{{/isContainer}} {{name}});
+    {{/vars}}
+
+private:
+    {{#vars}}
+    {{^isContainer}}
+    {{#isPrimitiveType}}
+    {{dataType}} {{name}}{};
+    {{/isPrimitiveType}}
+    {{^isPrimitiveType}}
+    {{dataType}} {{name}};
+    {{/isPrimitiveType}}
+    {{/isContainer}}
+    {{#isContainer}}
+    {{dataType}}{{#isMap}}<std::string, std::string>{{/isMap}}{{^isMap}}<{{#items}}{{dataType}}{{/items}}>{{/isMap}} {{name}};
+    {{/isContainer}}
+	{{/vars}}
+};
+{{/model}}
+{{/models}}
+}
+
+#endif /* SINGLE_CPP_CLIENT_{{classname}}_H_ */

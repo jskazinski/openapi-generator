@@ -1,0 +1,37 @@
+# Documentation for OpenAPI Single C++ Client Generator
+
+# General Information
+
+This is a C++ client generator that utilizes the json.hpp from nlohmann::json (https://github.com/nlohmann/json).
+The generator is called cpp-single becuase the C++ code only has to include a single header file (json.hpp) for
+all JSON processing. Obtain json.hppp and no other code changes are required.
+
+## {{#openAPI}}{{#info}}{{title}} {{version}} Single Client C++ {{/info}}{{/openAPI}}
+
+## Project Structure
+```
+samples/client/petstore/cpp/single/
+├── Models
+├── README.md
+```
+
+## Documentation for API Endpoints
+
+All URIs are relative to *{{{basePath}}}*
+
+
+{{#apiInfo}}{{#apis}}{{#operations}}
+
+|Method | HTTP request | Description|
+|------------- | ------------- | -------------|
+    {{#operation}}
+|*{{operationId}}* | *{{httpMethod}}* {{{path}}} | {{{summary}}}.|
+    {{/operation}}
+{{/operations}}{{/apis}}{{/apiInfo}}
+
+## Class Descriptions
+
+|Class | Description|
+|------------- | -------------|
+{{#models}}{{#model}}|*{{classname}}* | {{{description}}}.|
+{{/model}}{{/models}}
